@@ -58,12 +58,12 @@ pipeline {
             echo 'Pipeline completed.'
         }
         success {
-            emailext to: 'developer@example.com',
+            emailext to: 'aggarwalutkarsh989@gmail.com',
                      subject: "Pipeline Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                      body: "Good news, the pipeline succeeded!"
         }
         failure {
-            emailext to: 'developer@example.com',
+            emailext to: 'aggarwalutkarsh989@gmail.com',
                      subject: "Pipeline Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                      body: "Something went wrong. Please check the logs."
         }
