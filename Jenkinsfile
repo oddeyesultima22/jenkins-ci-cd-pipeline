@@ -46,7 +46,7 @@ pipeline {
         success {
             emailext to: 'aggarwalutkarsh989@gmail.com',
                      subject: "Pipeline Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
-                     body: "Good news, the pipeline succeeded!"
+                     body: "Good news, the pipeline succeeded! That's what it feels like."
         }
         failure {
             emailext to: 'aggarwalutkarsh989@gmail.com',
