@@ -1,54 +1,40 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
-                // Use a build automation tool, e.g., Maven
-                bat 'mvn clean package'
+                echo "Stage 1: Build - Build the code using a build automation tool (e.g., Maven)."
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                echo 'Running Unit and Integration Tests...'
-                // Use a test automation tool, e.g., JUnit
-                bat 'mvn test'
+                echo "Stage 2: Unit and Integration Tests - Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected."
             }
         }
         stage('Code Analysis') {
             steps {
-                echo 'Analyzing Code...'
-                // Use a code analysis tool, e.g., SonarQube
-                bat 'mvn sonar:sonar'
+                echo "Stage 3: Code Analysis - Integrate a code analysis tool (e.g., SonarQube) to analyze the code and ensure it meets industry standards."
             }
         }
         stage('Security Scan') {
             steps {
-                echo 'Performing Security Scan...'
-                // Use a security scanning tool, e.g., OWASP Dependency Check
-                bat 'dependency-check.bat --scan .'
+                echo "Stage 4: Security Scan - Perform a security scan on the code using a tool to identify any vulnerabilities (e.g., OWASP Dependency-Check)."
             }
         }
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploying to Staging...'
-                // Deploy to a staging server, e.g., using SCP or other tools
-                bat 'scp target\\my-app.jar user@staging-server:/path/to/deploy'
+                echo "Stage 5: Deploy to Staging - Deploy the application to a staging server (e.g., AWS EC2 instance) using a deployment tool (e.g., AWS CodeDeploy)."
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo 'Running Integration Tests on Staging...'
-                // Run tests in the staging environment
-                bat 'ssh user@staging-server "cd /path/to/deploy && ./run-tests.sh"'
+                echo "Stage 6: Integration Tests on Staging - Run integration tests on the staging environment to ensure the application functions as expected in a production-like environment."
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo 'Deploying to Production...'
-                // Deploy to a production server
-                bat 'scp target\\my-app.jar user@production-server:/path/to/deploy'
+                echo "Stage 7: Deploy to Production - Deploy the application to a production server (e.g., AWS EC2 instance) using a deployment tool (e.g., AWS CodeDeploy)."
             }
         }
     }
