@@ -41,27 +41,27 @@ pipeline {
 
     post {
         always {
+            // Archive the console output using a whitelisted method
             script {
-                // Save the console output to a file
-                writeFile file: 'build.log', text: currentBuild.rawBuild.getLog(1000).join("\n")
+                def logFile = 'build.log'
+                def logLines = currentBuild.getRawBuild().getLog(1000)
+                writeFile file: logFile, text: logLines.join('\n')
             }
             echo 'Pipeline completed.'
         }
         success {
             emailext(
-                to: 'choudharijay3@gmail.com',
+                to: 'aggarwalutkarsh989@gmail.com',
                 subject: "Pipeline Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                 body: "Good news, the pipeline succeeded! See attached log for details.",
-                attachLog: true,
                 attachmentsPattern: 'build.log'
             )
         }
         failure {
             emailext(
-                to: 'choudharijay3@gmail.com',
+                to: 'aggarwalutkarsh989@gmail.com',
                 subject: "Pipeline Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                 body: "Something went wrong. Please check the attached logs for more details.",
-                attachLog: true,
                 attachmentsPattern: 'build.log'
             )
         }
