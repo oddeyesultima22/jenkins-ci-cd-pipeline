@@ -51,7 +51,7 @@ pipeline {
         }
         success {
             emailext(
-                to: 'aggarwalutkarsh989@gmail.com',
+                to: 'choudharijay3@gmail.com',
                 subject: "Pipeline Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                 body: "Good news, the pipeline succeeded! See attached log for details.",
                 attachmentsPattern: 'build.log'
@@ -59,7 +59,7 @@ pipeline {
         }
         failure {
             emailext(
-                to: 'aggarwalutkarsh989@gmail.com',
+                to: 'choudharijay3@gmail.com',
                 subject: "Pipeline Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                 body: "Something went wrong. Please check the attached logs for more details.",
                 attachmentsPattern: 'build.log'
