@@ -41,17 +41,29 @@ pipeline {
 
     post {
         always {
+            script {
+                // Save the console output to a file
+                writeFile file: 'build.log', text: currentBuild.rawBuild.getLog(1000).join("\n")
+            }
             echo 'Pipeline completed.'
         }
         success {
-            emailext to: 'choudharijay3@gmail.com',
-                     subject: "Pipeline Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
-                     body: "Good news, the pipeline succeeded! That's what it feels like."
+            emailext(
+                to: 'choudharijay3@gmail.com',
+                subject: "Pipeline Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
+                body: "Good news, the pipeline succeeded! See attached log for details.",
+                attachLog: true,
+                attachmentsPattern: 'build.log'
+            )
         }
         failure {
-            emailext to: 'choudharijay3989@gmail.com',
-                     subject: "Pipeline Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
-                     body: "Something went wrong. Please check the logs."
+            emailext(
+                to: 'choudharijay3@gmail.com',
+                subject: "Pipeline Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
+                body: "Something went wrong. Please check the attached logs for more details.",
+                attachLog: true,
+                attachmentsPattern: 'build.log'
+            )
         }
     }
 }
